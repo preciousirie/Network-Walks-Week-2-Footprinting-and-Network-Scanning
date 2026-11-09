@@ -337,3 +337,90 @@ PM1-06-Wafw00f-WAF-Detection.png
 Conclusion
 
 The Wafw00f scan successfully identified ModSecurity (SpiderLabs) as the detected WAF protecting networkwalks.com.
+
+
+🔍 4.7 DNSRecon – DNS Enumeration
+
+Objective
+
+To collect publicly available DNS information associated with networkwalks.com, including address records, text records and other DNS-related information.
+
+🛠️ Tool Used
+
+DNSRecon
+
+Command Executed
+
+dnsrecon -d networkwalks.com
+
+📋 Key Findings
+
+DNS Category
+
+Observation
+
+Domain
+
+networkwalks.com
+
+A Record
+
+192.232.216.135
+
+TXT Record 1
+
+Google site verification record detected
+
+TXT Record 2
+
+SPF record detected
+
+SPF Mechanisms
+
++a, +mx, +ip4:50.87.144.87, +include:websitewelcome.com, ~all
+
+DNSSEC Query
+
+No answer received
+
+SOA Lookup
+
+DNS operation timed out
+
+Nameserver Used
+
+10.171.146.84
+
+SRV Records
+
+No SRV records found
+
+🔎 Analysis and Observations
+
+DNSRecon successfully identified the A record for networkwalks.com, resolving the domain to 192.232.216.135.
+
+The enumeration also discovered two TXT records. One contained a Google site verification value, while the other contained an SPF policy.
+
+The SPF record included mechanisms for authorizing the domain's A and MX records, a specific IPv4 address (50.87.144.87) and an external SPF include (websitewelcome.com). The ~all mechanism indicates a softfail policy for senders that do not match the listed mechanisms.
+
+The tool also reported that no answer was received for its DNSSEC query and that the SOA lookup timed out while using 10.171.146.84 as the DNS server.
+
+No SRV records were found during the enumeration.
+
+🛡️ Security Relevance
+
+DNS enumeration helps security professionals understand a domain's publicly available DNS configuration.
+
+A records reveal address resolution, TXT records can expose domain verification and email security policies, while SPF information helps explain which sources are authorized to send email for a domain.
+
+DNSSEC and SOA lookup errors should be recorded as observations. However, the DNSSEC query failure and SOA timeout alone do not establish a DNS security vulnerability.
+
+Organizations should periodically review their DNS records, email authentication policies and DNS infrastructure to ensure that configurations remain accurate and properly maintained.
+
+📸 Evidence
+
+PM1-07-DNSRecon-Enumeration.png
+
+Conclusion
+
+DNSRecon successfully identified the target domain's A and TXT records, including its Google verification and SPF information. The scan also reported DNSSEC and SOA lookup errors, alongside the absence of SRV records.
