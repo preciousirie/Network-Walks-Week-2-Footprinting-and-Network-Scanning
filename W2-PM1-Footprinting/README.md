@@ -1,76 +1,110 @@
+# 🔍 W2-PM1: Footprinting and Information Gathering
+
 ## 🖥️ 4.1 Environment Verification
 
-Before beginning the footprinting activities, I verified my Kali Linux environment and checked the availability of the required tools to ensure that the working environment was properly prepared.
+### Objective
 
-### 👤 Check 1: Verify the Current Username
+To verify the Kali Linux working environment and confirm the availability of the required tools before beginning the footprinting activities.
 
-**Command:**
+### 🛠️ Checks Performed
+
+**Check 1: Verify the Current Username**
+
+Command:
 
 ```bash
 whoami
 ```
 
-**Purpose:** To identify the currently logged-in Kali Linux user and confirm the active user account.
+Purpose: To identify the currently logged-in Kali Linux user and confirm the active user account.
 
-### 🛠️ Check 2: Verify the Availability of Required Tools
+**Check 2: Verify the Availability of Required Tools**
 
-I used the Linux `command -v` command followed by the names of the required tools to check whether they were available in the Kali Linux environment.
-
-**Command:**
+Command:
 
 ```bash
 command -v whois whatweb nslookup curl wafw00f dnsrecon
 ```
-Purpose: To verify the availability of the required tools and identify their executable paths before beginning the practical exercise.
 
-### 📋 Observation: The preliminary checks helped establish the readiness of the Kali Linux environment and determine whether any required tools needed to be installed before proceeding with the footprinting activities.
+Purpose: To check whether the required command-line tools were available in the Kali Linux environment and identify their executable paths.
 
+### 📋 Observations
 
-🔍 4.2 **WHOIS Information Gathering**
+The preliminary checks established the working environment and provided an initial assessment of the availability of the tools required for the footprinting exercise.
 
-Objective: To gather publicly available domain registration information about networkwalks.com using the WHOIS lookup tool.
+The `command -v` utility checks whether commands can be located through the system's executable search path.
 
-Tool Used **WHOIS**
+### 📸 Evidence
 
-Command:
+- `PM1-01-Environment-Verification.png`
 
-whois networkwalks.com
+### Conclusion
 
-Key Findings
+The environment verification established the initial readiness of the Kali Linux system for the practical footprinting activities.
 
-WHOIS Field
+---
 
-Observation
-
-Domain Name - NETWORKWALKS.COM
-
-Registrar - GoDaddy
-
-Creation Date - 6 November 2019
-
-Last Updated - 12 November 2025
-
-Registrar WHOIS Server - whois.godaddy.com
-
-**Analysis** : The WHOIS lookup provided publicly available registration information for the target domain.
-
-The domain registration date indicates that the domain was initially registered in November 2019. GoDaddy was identified as the registrar, while the last update recorded in the supplied output was in November 2025.
-
-**WHOIS** information is useful during passive reconnaissance because it helps establish basic domain registration details without directly interacting with the target's applications.
-
-Security Relevance
-
-Public registration information can help an organization understand what information about its domains is externally visible. Organizations should review their domain registration privacy settings and ensure that administrative contact information is appropriately protected.
-
-## 🔍 4.3 WhatWeb Technology Identification
+## 🔍 4.2 WHOIS – Domain Registration Information Gathering
 
 ### Objective
 
-To identify publicly detectable technologies, web server information, content management systems (CMS), and other technologies associated with `networkwalks.com`.
+To collect publicly available domain registration information associated with `networkwalks.com` using the WHOIS lookup utility.
 
 ### 🛠️ Tool Used
 
-- **WhatWeb**
+- WHOIS
+
+### Command Executed
+
+```bash
+whois networkwalks.com
+```
+
+### 📋 Key Findings
+
+| WHOIS Field | Observation |
+|---|---|
+| Domain Name | `NETWORKWALKS.COM` |
+| Registrar | GoDaddy |
+| Creation Date | 6 November 2019 |
+| Last Updated | 12 November 2025 |
+| Registrar WHOIS Server | `whois.godaddy.com` |
+
+### 🔎 Analysis and Observations
+
+The WHOIS lookup returned publicly available registration information for `networkwalks.com`.
+
+The domain was initially registered on 6 November 2019, with the latest update shown in the supplied output dated 12 November 2025.
+
+GoDaddy was identified as the domain registrar, while `whois.godaddy.com` was listed as the registrar WHOIS server.
+
+WHOIS information provides useful background during reconnaissance by helping security professionals understand domain registration details and identify publicly available registration information.
+
+### 🛡️ Security Relevance
+
+Domain registration information can help organizations understand what details about their domains are externally accessible.
+
+Organizations should periodically review their domain registration information and ensure that administrative contact details are appropriately protected.
+
+### 📸 Evidence
+
+- `PM1-02-WHOIS-Lookup.png`
+
+### Conclusion
+
+The WHOIS lookup successfully provided registration information about `networkwalks.com`, including its registrar, creation date and last recorded update.
+
+---
+
+## 🔍 4.3 WhatWeb – Web Technology Identification
+
+### Objective
+
+To identify publicly detectable web technologies, server information, content management systems and other technologies associated with `networkwalks.com`.
+
+### 🛠️ Tool Used
+
+- WhatWeb
 
 ### Command Executed
 
@@ -82,48 +116,56 @@ whatweb networkwalks.com
 
 | Category | Observation |
 |---|---|
-| HTTP Status | `301 Moved Permanently` |
-| HTTPS Status | `200 OK` |
-| Web Server | Apache |
+| HTTP Response | `301 Moved Permanently` |
+| HTTPS Response | `200 OK` |
+| Web Server Fingerprint | Apache |
 | IP Address | `192.232.216.135` |
-| CMS | WordPress 7.1.4 |
-| WordPress Plugin Identified | WordPress Download Manager 3.3.76 |
+| CMS | WordPress 7.1.4 (as reported) |
+| Plugin Identified | WordPress Download Manager 3.3.76 |
 | JavaScript Library | jQuery 3.7.1 |
-| Front-end Framework | Bootstrap 7.1.4 (as reported by WhatWeb) |
-| Web Technologies | HTML5, Open Graph Protocol |
-| Analytics | Google Tag Manager |
+| Front-end Technology | Bootstrap 7.1.4 (as reported) |
+| Other Technologies | HTML5, Open Graph Protocol |
+| Analytics Technology | Google Tag Manager |
 | Page Title | Networkwalks Academy |
-| Public Contact Email | info@networkwalks.com |
+| Public Contact Email | `info@networkwalks.com` |
 | Cookie Identified | `__wpdm_client` |
 | Cookie Attribute | HttpOnly detected |
 
 ### 🔎 Analysis and Observations
 
-The WhatWeb scan identified Apache as the web server and WordPress as the content management system used by the target website.
+The WhatWeb scan identified several technologies associated with the target website.
 
-The initial HTTP request returned a `301 Moved Permanently` response, redirecting visitors to the HTTPS version of the website. The HTTPS endpoint returned `200 OK`, indicating that the page was successfully accessible during the scan.
+The initial HTTP request returned a `301 Moved Permanently` response, redirecting visitors to the HTTPS version of the website. The HTTPS endpoint subsequently returned `200 OK`, indicating that the requested page was accessible.
 
-WhatWeb also identified jQuery, Bootstrap, Google Tag Manager and WordPress Download Manager. These findings provide an overview of some of the technologies used by the website.
+Apache was identified as the web server fingerprint, while WordPress was identified as the content management system.
 
-The scan detected the `__wpdm_client` cookie with the HttpOnly attribute. This attribute helps prevent client-side scripts from accessing that cookie.
+Additional technologies detected included jQuery, Bootstrap, Google Tag Manager and WordPress Download Manager.
+
+The scan also identified the `__wpdm_client` cookie and detected its HttpOnly attribute.
+
+These findings provide an overview of the website's publicly detectable technology stack. However, automated technology fingerprints should be treated as identification results rather than independent confirmation of every installed component or version.
 
 ### 🛡️ Security Relevance
 
-Technology fingerprinting is useful during passive reconnaissance because it helps security professionals understand the technologies exposed by a website.
+Web technology identification helps security professionals understand the technologies exposed by a website.
 
-Identifying CMS platforms, plugins, frameworks and server technologies can help guide further security reviews. However, identifying a technology or version does not automatically establish that it contains a vulnerability.
+Information about CMS platforms, plugins, frameworks and server technologies can guide further security reviews and help organizations identify components that may require maintenance or security updates.
 
-Organizations should keep their web server, CMS, plugins and front-end dependencies updated and periodically review their security configurations.
+Technology identification alone does not establish the presence of a vulnerability.
+
+Organizations should maintain their web applications, CMS platforms, plugins and dependencies through regular updates and security reviews.
 
 ### 📸 Evidence
 
-The following screenshot captures the WhatWeb command execution and its output during the technology identification exercise.
+The screenshot captures the WhatWeb command execution and its returned technology identification results.
 
 - `PM1-03-WhatWeb-Scan.png`
 
 ### Conclusion
 
-The WhatWeb scan successfully identified several publicly detectable technologies associated with `networkwalks.com`. The findings provide useful baseline information for the subsequent footprinting activities.
+The WhatWeb scan identified several publicly detectable technologies associated with `networkwalks.com`, providing useful information about its web application environment.
+
+---
 
 ## 🔍 4.4 Nslookup – DNS Information Gathering
 
@@ -133,7 +175,7 @@ To query the Domain Name System (DNS) and identify the IPv4 address associated w
 
 ### 🛠️ Tool Used
 
-- **Nslookup**
+- Nslookup
 
 ### Command Executed
 
@@ -148,7 +190,7 @@ nslookup networkwalks.com
 | Domain Queried | `networkwalks.com` |
 | DNS Server | `10.171.146.84` |
 | DNS Server Port | `53` |
-| DNS Response Type | Non-authoritative answer |
+| Response Type | Non-authoritative answer |
 | Resolved IPv4 Address | `192.232.216.135` |
 | Additional Observation | DNS communication timeout reported after the answer |
 
@@ -160,15 +202,19 @@ The domain resolved to `192.232.216.135`, matching the IP address identified dur
 
 The DNS server used for the query was `10.171.146.84`, communicating over port 53.
 
-The response was labelled non-authoritative, meaning the answer was supplied by a DNS resolver rather than directly by the domain's authoritative nameserver.
+The response was labelled non-authoritative, indicating that the answer was supplied by a DNS resolver rather than directly by the domain's authoritative nameserver.
 
-Although an answer was returned, the output also displayed a communication timeout involving the DNS server after the response. This indicates that an additional DNS communication attempt did not complete within the expected time.
+Although a valid DNS answer was returned, the output also displayed a communication timeout involving the DNS server after the answer.
+
+This timeout was recorded as an additional observation. It does not, by itself, establish a DNS configuration problem or vulnerability.
 
 ### 🛡️ Security Relevance
 
-DNS reconnaissance helps security professionals understand how domain names resolve to IP addresses and identify the DNS infrastructure involved in the resolution process.
+DNS reconnaissance helps security professionals understand how domain names are resolved into IP addresses and identify the DNS infrastructure involved in the resolution process.
 
-The resolved IP address provides useful information for documenting the domain's publicly visible network presence. DNS timeout messages should also be recorded because they may indicate intermittent communication issues, although a single timeout does not establish a DNS vulnerability.
+The resolved IP address provides useful information about the domain's network presence.
+
+DNS communication errors should also be documented because they may indicate intermittent communication or resolver-related issues that require further investigation.
 
 ### 📸 Evidence
 
@@ -176,251 +222,193 @@ The resolved IP address provides useful information for documenting the domain's
 
 ### Conclusion
 
-The Nslookup query successfully resolved `networkwalks.com` to `192.232.216.135`. The result was consistent with the IP address identified during the WhatWeb scan, although a subsequent DNS communication timeout was also observed.
+The Nslookup query successfully resolved `networkwalks.com` to `192.232.216.135`. The output also recorded a subsequent DNS communication timeout.
 
+---
 
-🔍 4.5 cURL – HTTP Header Analysis
+## 🔍 4.5 cURL – HTTP Response Header Analysis
 
-Objective
+### Objective
 
-To inspect the HTTP response headers returned by networkwalks.com and identify information about the web server, response status, cookies and other HTTP configurations.
+To inspect the HTTP response headers returned by `networkwalks.com` and identify information about the web server, response status, cookies and other HTTP configurations.
 
-🛠️ Tool Used
+### 🛠️ Tool Used
 
-cURL
+- cURL
 
-Command Executed
+### Command Executed
 
+```bash
 curl -I https://networkwalks.com
+```
 
-📋 Key Findings
+### 📋 Key Findings
 
-Category
+| Category | Observation |
+|---|---|
+| HTTP Protocol | HTTP/2 |
+| Response Status | `200 OK` |
+| Web Server Header | Apache |
+| Content Type | `text/html; charset=UTF-8` |
+| WordPress REST API Reference | `/wp-json/` detected |
+| Cookie | `__wpdm_client` |
+| Cookie Security Attributes | Secure, HttpOnly |
+| Referrer Policy | `no-referrer-when-downgrade` |
+| Cache Header | `x-nginx-cache: WordPress` |
+| Permissions Policy | Present |
+| Response Date | 8 November 2026 |
 
-Observation
+### 🔎 Analysis and Observations
 
-HTTP Protocol
+The cURL command successfully retrieved the HTTP response headers from the HTTPS endpoint of `networkwalks.com`.
 
-HTTP/2
+The server returned an `HTTP/2 200` response, indicating that the request was successfully processed.
 
-Response Status
+The response identified Apache through the Server header and revealed WordPress REST API references through the `/wp-json/` endpoint.
 
-200 OK
+The `__wpdm_client` cookie was also observed with both Secure and HttpOnly attributes.
 
-Web Server
+The Secure attribute restricts the cookie to secure connections, while HttpOnly prevents direct access to the cookie through client-side scripts.
 
-Apache
+Additional response headers included a permissions policy, referrer policy and the WordPress-related cache header `x-nginx-cache`.
 
-Content Type
+These headers provide useful information about the website's HTTP configuration and application environment.
 
-text/html; charset=UTF-8
+### 🛡️ Security Relevance
 
-WordPress REST API
+HTTP response header analysis helps security professionals understand how a web server communicates with clients and identify security-related configuration information.
 
-/wp-json/ detected
+Reviewing response headers and cookie attributes can help assess the presence of security controls.
 
-Cookie
+However, the presence of a security-related header does not independently establish that the website is secure. Further configuration review may be necessary.
 
-__wpdm_client
+### 📸 Evidence
 
-Cookie Security Attributes
+- `PM1-05-cURL-Header-Analysis.png`
 
-Secure, HttpOnly
+### Conclusion
 
-Referrer Policy
+The cURL request successfully retrieved the website's HTTP response headers, revealing information about its web server, WordPress configuration, cookie attributes and HTTP policies.
 
-no-referrer-when-downgrade
+---
 
-Cache Information
+## 🔍 4.6 Wafw00f – Web Application Firewall Detection
 
-x-nginx-cache: WordPress
+### Objective
 
-Permissions Policy
+To identify whether a Web Application Firewall (WAF) was detected in front of `networkwalks.com`.
 
-Present
+### 🛠️ Tool Used
 
-Response Date
+- Wafw00f v2.4.2
 
-8 November 2026
+### Command Executed
 
-🔎 Analysis and Observations
-
-The cURL command successfully retrieved the HTTP response headers from the HTTPS endpoint of networkwalks.com.
-
-The server returned an HTTP/2 200 response, indicating that the request was successfully processed.
-
-The response identified Apache as the web server and revealed WordPress REST API references through the /wp-json/ endpoint.
-
-The __wpdm_client cookie was also observed with both Secure and HttpOnly attributes. These attributes help protect the cookie by restricting transmission to secure connections and preventing direct access through client-side scripts.
-
-Additional response headers included a permissions policy, referrer policy and WordPress-related cache information.
-
-🛡️ Security Relevance
-
-HTTP header analysis helps security professionals understand how a web server communicates with clients and identify security-related configuration information.
-
-Reviewing headers and cookie attributes can help assess whether appropriate security controls are being applied. However, the presence of a particular header does not independently prove that the website is secure.
-
-📸 Evidence
-
-PM1-05-cURL-Header-Analysis.png
-
-Conclusion
-
-The cURL request successfully returned the website's HTTP response headers, revealing useful information about its web server, WordPress configuration, cookie attributes and HTTP security policies.
-
-
-🔍 4.6 Wafw00f – Web Application Firewall Detection
-
-Objective
-
-To identify whether a Web Application Firewall (WAF) was detected in front of networkwalks.com.
-
-🛠️ Tool Used
-
-Wafw00f v2.4.2
-
-Command Executed
-
+```bash
 wafw00f networkwalks.com
+```
 
-📋 Key Findings
+### 📋 Key Findings
 
-Category
+| Category | Observation |
+|---|---|
+| Target | `networkwalks.com` |
+| WAF Detection Result | WAF detected |
+| Identified WAF | ModSecurity |
+| Provider/Signature | SpiderLabs |
+| Number of Requests | 2 |
+| HTTPS Endpoint | `https://networkwalks.com` |
 
-Observation
+### 🔎 Analysis and Observations
 
-Target
-
-networkwalks.com
-
-WAF Detection Result
-
-WAF detected
-
-Identified WAF
-
-ModSecurity
-
-WAF Provider/Signature
-
-SpiderLabs
-
-Requests Made
-
-2
-
-HTTPS Endpoint
-
-https://networkwalks.com
-
-🔎 Analysis and Observations
-
-The Wafw00f scan identified ModSecurity (SpiderLabs) as the Web Application Firewall protecting the target website.
+The Wafw00f scan identified ModSecurity (SpiderLabs) as the Web Application Firewall associated with the target website.
 
 The tool completed its detection process using two HTTP requests.
 
-This finding indicates that the website has a detected web application firewall layer that may help monitor and filter certain HTTP requests.
+This result indicates that the website has a detectable web application firewall layer that may help inspect, monitor and filter HTTP requests.
 
-🛡️ Security Relevance
+The identification represents the tool's fingerprinting result and does not independently establish the effectiveness or completeness of the WAF configuration.
 
-A Web Application Firewall provides an additional layer of protection by inspecting web traffic and helping detect or filter suspicious requests.
+### 🛡️ Security Relevance
 
-Identifying the WAF technology is useful during reconnaissance because it provides insight into the website's defensive security infrastructure.
+A Web Application Firewall provides an additional layer of protection by inspecting web traffic and helping detect or filter potentially suspicious requests.
 
-WAF detection alone does not establish how effectively the firewall is configured or whether all potential threats are blocked.
+Identifying the WAF technology provides useful insight into the website's externally detectable defensive infrastructure.
 
-📸 Evidence
+Organizations should periodically review WAF rules, configurations and monitoring practices to ensure that the security controls remain effective.
 
-PM1-06-Wafw00f-WAF-Detection.png
+### 📸 Evidence
 
-Conclusion
+- `PM1-06-Wafw00f-WAF-Detection.png`
 
-The Wafw00f scan successfully identified ModSecurity (SpiderLabs) as the detected WAF protecting networkwalks.com.
+### Conclusion
 
+The Wafw00f scan identified ModSecurity (SpiderLabs) as the detected Web Application Firewall associated with `networkwalks.com`.
 
-🔍 4.7 DNSRecon – DNS Enumeration
+---
 
-Objective
+## 🔍 4.7 DNSRecon – DNS Enumeration
 
-To collect publicly available DNS information associated with networkwalks.com, including address records, text records and other DNS-related information.
+### Objective
 
-🛠️ Tool Used
+To collect publicly available DNS information associated with `networkwalks.com`, including address records, text records and other DNS-related information.
 
-DNSRecon
+### 🛠️ Tool Used
 
-Command Executed
+- DNSRecon
 
+### Command Executed
+
+```bash
 dnsrecon -d networkwalks.com
+```
 
-📋 Key Findings
+### 📋 Key Findings
 
-DNS Category
+| DNS Category | Observation |
+|---|---|
+| Domain | `networkwalks.com` |
+| A Record | `192.232.216.135` |
+| TXT Record 1 | Google site verification record detected |
+| TXT Record 2 | SPF record detected |
+| SPF Mechanisms | `+a`, `+mx`, `+ip4:50.87.144.87`, `+include:websitewelcome.com`, `~all` |
+| DNSSEC Query | No answer received |
+| SOA Lookup | DNS operation timed out |
+| Nameserver Used | `10.171.146.84` |
+| SRV Records | No SRV records found |
 
-Observation
+### 🔎 Analysis and Observations
 
-Domain
-
-networkwalks.com
-
-A Record
-
-192.232.216.135
-
-TXT Record 1
-
-Google site verification record detected
-
-TXT Record 2
-
-SPF record detected
-
-SPF Mechanisms
-
-+a, +mx, +ip4:50.87.144.87, +include:websitewelcome.com, ~all
-
-DNSSEC Query
-
-No answer received
-
-SOA Lookup
-
-DNS operation timed out
-
-Nameserver Used
-
-10.171.146.84
-
-SRV Records
-
-No SRV records found
-
-🔎 Analysis and Observations
-
-DNSRecon successfully identified the A record for networkwalks.com, resolving the domain to 192.232.216.135.
+DNSRecon successfully identified the A record for `networkwalks.com`, resolving the domain to `192.232.216.135`.
 
 The enumeration also discovered two TXT records. One contained a Google site verification value, while the other contained an SPF policy.
 
-The SPF record included mechanisms for authorizing the domain's A and MX records, a specific IPv4 address (50.87.144.87) and an external SPF include (websitewelcome.com). The ~all mechanism indicates a softfail policy for senders that do not match the listed mechanisms.
+The SPF record included mechanisms for authorizing the domain's A and MX records, a specific IPv4 address (`50.87.144.87`) and an external SPF include (`websitewelcome.com`).
 
-The tool also reported that no answer was received for its DNSSEC query and that the SOA lookup timed out while using 10.171.146.84 as the DNS server.
+The `~all` mechanism indicates a softfail policy for senders that do not match the listed SPF mechanisms.
+
+The tool also reported that no answer was received for its DNSSEC query and that the SOA lookup timed out while using `10.171.146.84` as the DNS server.
 
 No SRV records were found during the enumeration.
 
-🛡️ Security Relevance
+These results provide an overview of the DNS records returned during the enumeration. The DNSSEC query failure and SOA timeout should be treated as lookup observations rather than confirmed security weaknesses.
+
+### 🛡️ Security Relevance
 
 DNS enumeration helps security professionals understand a domain's publicly available DNS configuration.
 
-A records reveal address resolution, TXT records can expose domain verification and email security policies, while SPF information helps explain which sources are authorized to send email for a domain.
+A records reveal address resolution, while TXT records can expose domain verification information and email authentication policies.
 
-DNSSEC and SOA lookup errors should be recorded as observations. However, the DNSSEC query failure and SOA timeout alone do not establish a DNS security vulnerability.
+SPF information helps organizations identify which sources are authorized to send email on behalf of a domain.
 
-Organizations should periodically review their DNS records, email authentication policies and DNS infrastructure to ensure that configurations remain accurate and properly maintained.
+DNSSEC, SOA and other DNS configuration observations can guide further review of the domain's DNS infrastructure.
 
-📸 Evidence
+Organizations should periodically review DNS records, email authentication policies and DNS infrastructure to ensure that configurations remain accurate and properly maintained.
 
-PM1-07-DNSRecon-Enumeration.png
+### 📸 Evidence
 
-Conclusion
+- `PM1-07-DNSRecon-Enumeration.png`
 
-DNSRecon successfully identified the target domain's A and TXT records, including its Google verification and SPF information. The scan also reported DNSSEC and SOA lookup errors, alongside the absence of SRV records.
+### Conclusion
+
+DNSRecon successfully identified the target domain's A and TXT records, including Google site verification and SPF information. The enumeration also reported DNSSEC and SOA lookup errors, alongside the absence of SRV records.
