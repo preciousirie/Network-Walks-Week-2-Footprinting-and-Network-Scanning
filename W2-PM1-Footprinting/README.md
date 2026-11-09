@@ -124,3 +124,56 @@ The following screenshot captures the WhatWeb command execution and its output d
 ### Conclusion
 
 The WhatWeb scan successfully identified several publicly detectable technologies associated with `networkwalks.com`. The findings provide useful baseline information for the subsequent footprinting activities.
+
+## 🔍 4.4 Nslookup – DNS Information Gathering
+
+### Objective
+
+To query the Domain Name System (DNS) and identify the IPv4 address associated with `networkwalks.com`.
+
+### 🛠️ Tool Used
+
+- **Nslookup**
+
+### Command Executed
+
+```bash
+nslookup networkwalks.com
+```
+
+### 📋 Key Findings
+
+| Category | Observation |
+|---|---|
+| Domain Queried | `networkwalks.com` |
+| DNS Server | `10.171.146.84` |
+| DNS Server Port | `53` |
+| DNS Response Type | Non-authoritative answer |
+| Resolved IPv4 Address | `192.232.216.135` |
+| Additional Observation | DNS communication timeout reported after the answer |
+
+### 🔎 Analysis and Observations
+
+The Nslookup command successfully returned an IPv4 address for `networkwalks.com`.
+
+The domain resolved to `192.232.216.135`, matching the IP address identified during the WhatWeb scan.
+
+The DNS server used for the query was `10.171.146.84`, communicating over port 53.
+
+The response was labelled non-authoritative, meaning the answer was supplied by a DNS resolver rather than directly by the domain's authoritative nameserver.
+
+Although an answer was returned, the output also displayed a communication timeout involving the DNS server after the response. This indicates that an additional DNS communication attempt did not complete within the expected time.
+
+### 🛡️ Security Relevance
+
+DNS reconnaissance helps security professionals understand how domain names resolve to IP addresses and identify the DNS infrastructure involved in the resolution process.
+
+The resolved IP address provides useful information for documenting the domain's publicly visible network presence. DNS timeout messages should also be recorded because they may indicate intermittent communication issues, although a single timeout does not establish a DNS vulnerability.
+
+### 📸 Evidence
+
+- `PM1-04-Nslookup-Results.png`
+
+### Conclusion
+
+The Nslookup query successfully resolved `networkwalks.com` to `192.232.216.135`. The result was consistent with the IP address identified during the WhatWeb scan, although a subsequent DNS communication timeout was also observed.
