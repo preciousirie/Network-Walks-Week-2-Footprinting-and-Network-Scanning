@@ -268,3 +268,72 @@ PM1-05-cURL-Header-Analysis.png
 Conclusion
 
 The cURL request successfully returned the website's HTTP response headers, revealing useful information about its web server, WordPress configuration, cookie attributes and HTTP security policies.
+
+
+🔍 4.6 Wafw00f – Web Application Firewall Detection
+
+Objective
+
+To identify whether a Web Application Firewall (WAF) was detected in front of networkwalks.com.
+
+🛠️ Tool Used
+
+Wafw00f v2.4.2
+
+Command Executed
+
+wafw00f networkwalks.com
+
+📋 Key Findings
+
+Category
+
+Observation
+
+Target
+
+networkwalks.com
+
+WAF Detection Result
+
+WAF detected
+
+Identified WAF
+
+ModSecurity
+
+WAF Provider/Signature
+
+SpiderLabs
+
+Requests Made
+
+2
+
+HTTPS Endpoint
+
+https://networkwalks.com
+
+🔎 Analysis and Observations
+
+The Wafw00f scan identified ModSecurity (SpiderLabs) as the Web Application Firewall protecting the target website.
+
+The tool completed its detection process using two HTTP requests.
+
+This finding indicates that the website has a detected web application firewall layer that may help monitor and filter certain HTTP requests.
+
+🛡️ Security Relevance
+
+A Web Application Firewall provides an additional layer of protection by inspecting web traffic and helping detect or filter suspicious requests.
+
+Identifying the WAF technology is useful during reconnaissance because it provides insight into the website's defensive security infrastructure.
+
+WAF detection alone does not establish how effectively the firewall is configured or whether all potential threats are blocked.
+
+📸 Evidence
+
+PM1-06-Wafw00f-WAF-Detection.png
+
+Conclusion
+
+The Wafw00f scan successfully identified ModSecurity (SpiderLabs) as the detected WAF protecting networkwalks.com.
