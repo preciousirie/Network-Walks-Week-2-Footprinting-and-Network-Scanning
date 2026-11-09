@@ -115,6 +115,11 @@ Identifying CMS platforms, plugins, frameworks and server technologies can help 
 
 Organizations should keep their web server, CMS, plugins and front-end dependencies updated and periodically review their security configurations.
 
+### 📸 Evidence
+
+The following screenshot captures the WhatWeb command execution and its output during the technology identification exercise.
+
+- `PM1-03-WhatWeb-Scan.png`
 
 ### Conclusion
 
