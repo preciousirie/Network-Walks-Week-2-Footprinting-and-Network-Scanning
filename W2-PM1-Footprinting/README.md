@@ -177,3 +177,94 @@ The resolved IP address provides useful information for documenting the domain's
 ### Conclusion
 
 The Nslookup query successfully resolved `networkwalks.com` to `192.232.216.135`. The result was consistent with the IP address identified during the WhatWeb scan, although a subsequent DNS communication timeout was also observed.
+
+
+🔍 4.5 cURL – HTTP Header Analysis
+
+Objective
+
+To inspect the HTTP response headers returned by networkwalks.com and identify information about the web server, response status, cookies and other HTTP configurations.
+
+🛠️ Tool Used
+
+cURL
+
+Command Executed
+
+curl -I https://networkwalks.com
+
+📋 Key Findings
+
+Category
+
+Observation
+
+HTTP Protocol
+
+HTTP/2
+
+Response Status
+
+200 OK
+
+Web Server
+
+Apache
+
+Content Type
+
+text/html; charset=UTF-8
+
+WordPress REST API
+
+/wp-json/ detected
+
+Cookie
+
+__wpdm_client
+
+Cookie Security Attributes
+
+Secure, HttpOnly
+
+Referrer Policy
+
+no-referrer-when-downgrade
+
+Cache Information
+
+x-nginx-cache: WordPress
+
+Permissions Policy
+
+Present
+
+Response Date
+
+8 November 2026
+
+🔎 Analysis and Observations
+
+The cURL command successfully retrieved the HTTP response headers from the HTTPS endpoint of networkwalks.com.
+
+The server returned an HTTP/2 200 response, indicating that the request was successfully processed.
+
+The response identified Apache as the web server and revealed WordPress REST API references through the /wp-json/ endpoint.
+
+The __wpdm_client cookie was also observed with both Secure and HttpOnly attributes. These attributes help protect the cookie by restricting transmission to secure connections and preventing direct access through client-side scripts.
+
+Additional response headers included a permissions policy, referrer policy and WordPress-related cache information.
+
+🛡️ Security Relevance
+
+HTTP header analysis helps security professionals understand how a web server communicates with clients and identify security-related configuration information.
+
+Reviewing headers and cookie attributes can help assess whether appropriate security controls are being applied. However, the presence of a particular header does not independently prove that the website is secure.
+
+📸 Evidence
+
+PM1-05-cURL-Header-Analysis.png
+
+Conclusion
+
+The cURL request successfully returned the website's HTTP response headers, revealing useful information about its web server, WordPress configuration, cookie attributes and HTTP security policies.
