@@ -1,123 +1,91 @@
-# Network Walks Cybersecurity Internship – Week 2
+# Network Walks Cybersecurity Internship — Week 2
 
-## Footprinting, Reconnaissance and Network Scanning
-
-**Program:** Network Walks Cybersecurity Internship  
 **Batch:** B084  
-**Week:** 2  
-**Focus:** Footprinting, Reconnaissance and Network Scanning  
-**Status:** In Progress
+**Focus:** Footprinting and Network Scanning
 
----
+## Overview
 
-## 1. Project Overview
+This repository documents my Week 2 practical activities as part of the Network Walks Cybersecurity Internship. The exercises focus on information gathering, reconnaissance, network discovery, and basic analysis using industry-relevant cybersecurity tools.
 
-This project documents my practical learning activities during Week 2 of the Network Walks Cybersecurity Internship.
+The work is organized into two practical modules, supported by screenshots and documented findings.
 
-The project combines two practical modules:
-
-- **W2-PM1:** Footprinting with Multiple Tools
-- **W2-PM5:** Zenmap Scanning
-
-The exercises focus on understanding how publicly available domain information can be collected and analyzed, as well as how network discovery can help identify active devices within an authorized local network.
-
-The project includes practical observations, commands, screenshots, technical explanations and security recommendations.
-
-## 2. Learning Objectives
+## Learning Objectives
 
 - Understand the fundamentals of footprinting and reconnaissance.
-- Identify publicly available domain registration information.
-- Examine web technologies and DNS information.
-- Understand HTTP response headers and WAF identification.
-- Learn network discovery using Zenmap.
-- Identify active hosts and relevant network information.
-- Document technical findings professionally.
-- Understand the importance of authorization in cybersecurity testing.
+- Identify domain information and investigate DNS records.
+- Examine website technologies and HTTP response headers.
+- Understand basic web application firewall detection.
+- Discover active devices within an authorized local network.
+- Interpret basic network scan results and host information.
+- Generate and document a network topology diagram.
 
-## 3. Tools and Technologies
+## Project Modules
 
-| Tool | Purpose |
-|---|---|
-| Kali Linux | Reconnaissance environment |
-| WHOIS | Domain registration information |
-| WhatWeb | Web technology identification |
-| Nslookup | DNS resolution |
-| cURL | HTTP response header inspection |
-| Wafw00f | Web Application Firewall identification |
-| DNSRecon | DNS information gathering |
-| Zenmap | Graphical network scanning interface |
-| Nmap | Network discovery and scanning engine |
-| Windows CMD | Local network configuration |
+### Module 1: Footprinting
 
-## 4. Practical Modules
+**Folder:** `W2-PM1-Footprinting/`
 
-### W2-PM1 – Footprinting with Multiple Tools
+This module covers information gathering and reconnaissance using multiple tools.
 
-This module focuses on collecting and analyzing publicly available information about the assigned domain.
+**Tools used:**
+- WHOIS
+- WhatWeb
+- Nslookup
+- cURL
+- WAFW00F
+- DNSRecon
 
-Tools covered:
+[View Module 1 Documentation](W2-PM1-Footprinting/README.md)
 
-1. WHOIS
-2. WhatWeb
-3. Nslookup
-4. cURL
-5. Wafw00f
-6. DNSRecon
+### Module 2: Zenmap Network Scanning
 
-Evidence and individual findings will be documented in:
+**Folder:** `W2-PM2-Zenmap-Network-Scanning/`
 
-[`W2-PM1-Footprinting/`](W2-PM1-Footprinting/)
+This module focuses on local network discovery and scan-result analysis using Zenmap, the graphical interface for Nmap.
 
-### W2-PM5 – Zenmap Scanning
-
-This module focuses on network discovery using Zenmap.
-
-Activities include:
-
+**Activities included:**
 - Identifying the local IP address and subnet.
-- Discovering active hosts within the authorized local network.
-- Examining available IP and MAC address information.
-- Generating a network topology.
-- Documenting scanning results.
+- Configuring the appropriate subnet target in CIDR notation.
+- Discovering active hosts on the authorized local network.
+- Reviewing host information and available MAC address details.
+- Generating and exporting a network topology diagram.
 
-Evidence will be documented in:
+[View Module 2 Documentation](W2-PM2-Zenmap-Network-Scanning/README.md)
 
-[`W2-PM5-Zenmap-Scanning/`](W2-PM5-Zenmap-Scanning/)
+## Final Report
 
-## 5. Final Penetration Testing Report
+The final report brings together the practical activities, methodology, observations, learning outcomes, and conclusions from both modules.
 
-A consolidated report will combine the findings from both practical modules.
+[View Week 2 Final Report](Final-Report/Week-2-Penetration-Testing-Report.md)
 
-The report will cover:
+## Tools and Environment
 
-- Introduction and methodology.
-- Tools and commands used.
-- Technical observations.
-- Evidence and screenshots.
-- Risk analysis.
-- Security recommendations.
-- Conclusion.
+| Category | Tools |
+|---|---|
+| Operating System | Kali Linux, Windows 11 |
+| Footprinting | WHOIS, WhatWeb, Nslookup, cURL, WAFW00F, DNSRecon |
+| Network Scanning | Zenmap, Nmap |
+| Documentation | GitHub, Markdown |
+| Evidence | Screenshots, network topology PDF |
 
-[View Final Report](Final-Report/Week-2-Penetration-Testing-Report.md)
+## Key Learning Outcome
 
-## 6. Evidence and Documentation
+One important lesson from the network scanning exercise was understanding the difference between a local host IP address and a network subnet.
 
-Screenshots and supporting materials will be organized into their respective module folders to make the project easier to navigate and review.
+When the objective is to discover active devices across a subnet, the target should be the correct network address in CIDR notation rather than only the local computer's IP address. The subnet must be determined from the actual IP address and subnet mask.
 
-## 7. Authorization and Ethical Considerations
+## Evidence and Documentation
 
-All testing activities must remain within authorized environments and approved scopes.
+Each module contains its own README and supporting evidence. Screenshots and exported files are organized within their respective module folders to make the practical work easy to review.
 
-Publicly available information gathering, network discovery and scanning are performed for educational purposes and must not be used to access or interfere with systems without appropriate permission.
+## Responsible Testing
 
-Technical observations are not automatically confirmed vulnerabilities.
+All network scanning activities documented in this repository were conducted within an authorized local network environment for educational purposes.
 
-## 8. Conclusion
+## Conclusion
 
-This project demonstrates my developing understanding of footprinting, reconnaissance and network discovery as foundational activities in penetration testing.
+Week 2 provided practical exposure to footprinting, reconnaissance, DNS investigation, website technology identification, network discovery, and basic scan-result interpretation.
 
-Through these exercises, I aim to strengthen my practical cybersecurity knowledge, technical documentation skills and ability to interpret security-related findings.
+The exercises strengthened my understanding of how information gathering and network scanning contribute to the early stages of a penetration-testing workflow.
 
----
-
-**Network Walks Cybersecurity Internship | Batch B084 | Week 2**
+**Network Walks Cybersecurity Internship — Batch B084**
